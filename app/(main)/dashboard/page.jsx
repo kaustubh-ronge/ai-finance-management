@@ -9,7 +9,6 @@ import AccountCard from './_components/account-card'
 export default async function DashboardPage() {
 
   const accounts = await getAccounts();
-  console.log(accounts);
 
   return (
     <div className='px-5'>
@@ -25,7 +24,7 @@ export default async function DashboardPage() {
         <CreateAccountDrawer >
           <Card className='hover:shadow-md transition-shadow cursor-pointer border-dashed'>
             <CardContent className='flex flex-col items-center justify-center text-muted-foreground h-full pt-5'>
-              <Plus className='h-10 w-10 mb-2' />
+              <Plus className='h-13 w-10 mb-2' />
               <p className='text-sm font-medium'>Add New Account</p>
             </CardContent>
           </Card>
