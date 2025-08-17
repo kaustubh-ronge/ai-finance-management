@@ -79,7 +79,7 @@ export async function createAccount(data) {
   }
 }
 
-export async function getAccounts() {
+export async function getUserAccounts() {
   const { userId } = await auth();
   if (!userId) throw new Error("User not authenticated");
 

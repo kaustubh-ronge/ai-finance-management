@@ -1,20 +1,35 @@
-import { getAccounts } from '@/actions/dashboard'
 import { accountSchema } from '@/app/lib/schema'
 import CreateAccountDrawer from '@/components/CreateAccountDrawer'
 import { Card, CardContent } from '@/components/ui/card'
 import { Plus } from 'lucide-react'
 import React from 'react'
 import AccountCard from './_components/account-card'
+import { getUserAccounts } from '@/actions/dashboard'
+import { getCurrentBudget } from '@/actions/budget'
+import { BudgetProgress } from './_components/BudgetProgress'
 
 export default async function DashboardPage() {
 
-  const accounts = await getAccounts();
+  const accounts = await getUserAccounts();
+  const defaultAccount = accounts?.find((account) => account.isDefault);
+
+  let budgetData = null;
+  if (defaultAccount) {
+    budgetData = await getCurrentBudget(defaultAccount.id);
+  }
+
 
   return (
     <div className='px-5'>
 
       {/* Budget progress  */}
 
+       {defaultAccount && (
+        <BudgetProgress
+        initialBudget = {budgetData?.budget}
+        currentExpenses={budgetData?.currentExpenses||0}
+        />
+       )}
 
       {/* overview  */}
 
